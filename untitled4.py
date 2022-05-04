@@ -20,7 +20,7 @@ serial = QSerialPort()
 serial.setBaudRate(115200)
 
 portList = []
-
+data=''
 
 
 ports = QSerialPortInfo().availablePorts()
@@ -107,29 +107,74 @@ def on_read():
 '''  
     
 
-
-        
 def STOP(checked):
+    global data
     if (checked == True):
-        serial.writeData('c1')
-        
+        data1='11\r\n'
+    else:
+        data1 = data
+    serial.writeData(data1.encode())
+    #print(data.encode())
+
 def scan(checked):
+    global data
     if (checked == True):
-        serial.writeData('s1')
+        data='21\r\n'
+    else:
+        data='20\r\n'
+    serial.write(data.encode())
+    print(data.encode())
+
+def left_p():
+    global data
+    data='32\r\n'
+    serial.writeData(data.encode())
+    #print(data.encode())
+
+def right_p():
+    global data
+    data='31\r\n'
+    serial.writeData(data.encode())
+    #print(data.encode())
+    
+def left_r():
+    global data
+    data='30\r\n'
+    serial.writeData(data.encode())
+    #print(data.encode())
+
+def right_r():
+    global data
+    data='30\r\n'
+    serial.writeData(data.encode())
+    #print(data.encode())
+    
+
     
 
 def com(checked):
     if (checked == True):
         serial.setPortName(ui.port_list.currentText())
         serial.open(QtCore.QIODevice.ReadWrite)
+        
     else:
         serial.close()
 
+
+    
+ui.open_b.toggled.connect(com)
 serial.readyRead.connect(on_read)
+
 ui.STOP_b.toggled.connect(STOP)
 ui.rapid_scan_b.toggled.connect(scan)
+ui.left_b.pressed.connect(left_p)
+ui.right_b.pressed.connect(right_p)
+ui.left_b.released.connect(left_r)
+ui.right_b.released.connect(right_r)
 
-ui.open_b.toggled.connect(com)
+
+
+
 
 
 
@@ -142,4 +187,5 @@ ui.spectrum_w.plot(x, y, pen=pen1)
 ui.show()
 app.exec()
 #print('puk')
+STOP(True)
 serial.close()
