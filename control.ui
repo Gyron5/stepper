@@ -78,32 +78,6 @@
              </layout>
             </item>
             <item>
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_8">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <item>
                <widget class="QLabel" name="label_3">
@@ -145,6 +119,9 @@
                 <property name="text">
                  <string>Rapid scan</string>
                 </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
                 <property name="flat">
                  <bool>false</bool>
                 </property>
@@ -153,6 +130,22 @@
              </layout>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="STOP_b">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>STOP</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <spacer name="horizontalSpacer_4">

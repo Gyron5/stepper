@@ -14,6 +14,7 @@ Protocentral_ADS1220 ads1220;
 #define ADC_DRDY 6
 #define AI2 A2
 
+int32_t data;
 int32_t adc_data;
 uint8_t  Td = 5;
 uint32_t ADC_t = 0;
@@ -102,10 +103,18 @@ void autochangedir(){
 }
 void loop() {
   adc_data=ads1220.Read_WaitForData();
-  Serial.println(adc_data*2.048/pow(2,23),4);// Serial.print(", "); Serial.print(pinD3count); Serial.print(", "); Serial.print(pinA0state);Serial.print(", "); Serial.println(pinA2state);
+  Serial.println(adc_data*2.048/pow(2,23),4); Serial.print(", "); Serial.print(pinD3count); Serial.print(", ");// Serial.print(pinA0state);Serial.print(", "); Serial.println(pinA2state);
+  if (Serial.available() > 0) {
+    data = Serial.readString();
+  }
+  if (data == 'c1'){
+    digitalWrite(ENAPin,LOW);
+  }
+  if (data == 's1'){
+    pinA0state=digitalRead(A0);
+    pinA2state=digitalRead(A2);
+    autochangedir();
+  }
   
-  pinA0state=digitalRead(A0);
-  pinA2state=digitalRead(A2);
-  autochangedir();
 
 }

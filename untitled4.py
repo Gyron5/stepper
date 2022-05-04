@@ -107,9 +107,15 @@ def on_read():
 '''  
     
 
-    #print(t2)
+
         
-    
+def STOP(checked):
+    if (checked == True):
+        serial.writeData('c1')
+        
+def scan(checked):
+    if (checked == True):
+        serial.writeData('s1')
     
 
 def com(checked):
@@ -120,7 +126,8 @@ def com(checked):
         serial.close()
 
 serial.readyRead.connect(on_read)
-
+ui.STOP_b.toggled.connect(STOP)
+ui.rapid_scan_b.toggled.connect(scan)
 
 ui.open_b.toggled.connect(com)
 
